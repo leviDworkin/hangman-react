@@ -3,7 +3,7 @@ interface GuessesNum{
 }
 const Guesses = ({guessNum}:GuessesNum)=>{
     return(
-        <span className="guesses">Guesses:{guessNum}</span>
+        <span>Guesses:{guessNum}</span>
     );
 }
 

@@ -10,8 +10,8 @@ const InputLetter = ({onInput}:InputLetterProp) => {
 
     return(
         <div className="guess-input">
-            <input onChange={(e)=>setInput(e.target.value)} type="text" min={1} max={1} placeholder="Enter letter guess"></input>
-            <button className="submit-btn" onClick={()=>onInput(inputValue)}>Submit</button>
+            <input className="input-elem" onChange={(e)=>setInput(e.target.value)} type="text" min={1} max={1} placeholder="Enter letter guess"></input>
+            <button className="short-btn" onClick={()=>onInput(inputValue)}>Submit</button>
         </div>
     );
 }

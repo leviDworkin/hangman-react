@@ -4,13 +4,21 @@ import Letter from "./Letter";
 interface CorrectWordProp{
     correctWord:string
     currentLetterIndexes:Array<number>;
+    isWinner:()=>void;
 }
-const CorrectLetters = ({correctWord, currentLetterIndexes}:CorrectWordProp) => {
+const CorrectLetters = ({correctWord, currentLetterIndexes, isWinner}:CorrectWordProp) => {
     const [savedIndexes, setSavedIndexs] = useState<string[]>(new Array(correctWord.length));
 
     const letters = correctWord.split('');
-    // const correctLetters = currentLetterIndexes.map( index => {letter, display: true} : {letter,})
     
+    
+    const checkIfWinner = () => {
+        const correctArr = savedIndexes.filter((index, letterIndex) => letterIndex != null);
+        if(correctArr.length == correctWord.length){
+            isWinner();
+        }
+    }
+
     const getValue = (index:number,letters:string[], currentLetterIndexes:number[]):string => {
         let res = currentLetterIndexes.includes(index) ? letters[index] : "_"
         if(res != "_"){
@@ -20,6 +28,8 @@ const CorrectLetters = ({correctWord, currentLetterIndexes}:CorrectWordProp) => 
         }
         return res;
     }
+
+    checkIfWinner();
 
     return(
         <div className='word'>

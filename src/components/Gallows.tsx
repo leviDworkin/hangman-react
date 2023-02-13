@@ -15,7 +15,7 @@ const Gallows = ({attempt}:FailedGuessNumProp)=>{
     const imgsArr = [logo0,logo1,logo2,logo3,logo4,logo5,logo6];
 
     return(
-        <div className="app-logo">
+        <div className="hangman-img">
             <img src={imgsArr[attempt]} alt=''/>
         </div>
     );

@@ -3,8 +3,9 @@ interface LetterProp{
 }
 const Letter = ({value}:LetterProp)=>{
     return(
-        <div>
-            {<span>{value}</span>}
+        <div className="letter"> 
+        
+            {<span>{value}&nbsp;</span>}
         </div>
     );
 }

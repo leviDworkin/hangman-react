@@ -1,0 +1,123 @@
+.game {
+    width: 600px;
+    height: 600px;
+}
+
+/* image 1 */
+
+.app-logo {
+    position: relative;
+    width: 232px;
+    height: 202px;
+}
+
+
+/* Hangman */
+
+app-header {
+    position: absolute;
+    width: 318px;
+    height: 90px;
+    
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 84px;
+    
+    color: #000000;
+}
+
+/* Guesses: */
+
+.guesses {
+    position: relative;
+    width: 288px;
+    height: 46px;
+    
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 47px;
+    
+    color: #000000;
+}
+
+
+/* Word: _ _ _ _ _ */
+
+.word {
+    position: relative;
+    width: 246px;
+    height: 44px;
+    
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 47px;
+    
+    color: #000000;
+    
+}
+
+/* Reset game button */
+
+.reset-btn {
+    position: relative;
+    width: 139px;
+    height: 36px;
+    
+}
+
+
+/* Submit guess button */
+
+.submit-btn {
+    position: relative;
+    width: 139px;
+    height: 34px;
+
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+    letter-spacing: -0.01em;
+
+    color: #000000;
+    z-index: 1;
+}
+
+
+
+
+/* Choose game dropdown */
+
+.choose-dropdown {
+    position: absolute;
+    width: 283px;
+    height: 36px;
+}
+
+
+/* Guess input */
+
+.guess-input {
+    position: absolute;
+    width: 283px;
+    height: 36px;
+
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+    letter-spacing: -0.01em;
+
+    color: #000000;
+    z-index: 1;
+}

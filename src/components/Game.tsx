@@ -45,8 +45,8 @@ const Game = () => {
         if(aIsValidLetter){
             const aLetter = inputLetter?.toUpperCase() as string;
             if(lettersGuessed[aLetter] == true || lettersGuessed[aLetter] == false){
-                //TODO
-                console.log("Already guess that letter");
+                //TODO- some ui indication for this
+                console.log("Already guessed that letter");
             }else{
                 const aIndex = selectedWord?.indexOf(aLetter);
                 lettersGuessed[aLetter] = aIndex != -1;
@@ -64,7 +64,7 @@ const Game = () => {
                 setGuessesNum(aGuessNumber);
             }
         }else{
-            //TODO
+            //TODO- some ui indication for this
             console.log("Invalid input");
         }
     }

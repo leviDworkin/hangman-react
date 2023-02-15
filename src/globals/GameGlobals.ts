@@ -1,4 +1,8 @@
 
+// export class Globals{
+//     public static finalAnswer:string|undefined;
+// };
+
 export const GameTypes:Record<string,string> = {
     "1":"STAIRS",
     "2":"KABOOM",

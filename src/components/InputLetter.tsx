@@ -5,13 +5,19 @@ interface InputLetterProp{
 }
 
 const InputLetter = ({onInput}:InputLetterProp) => {
-    const [inputValue, setInput] = useState<string>();
+    let inputValue:string;
 
+    const onEnterKey = (e:React.KeyboardEvent<HTMLInputElement>)=>{
+        if(e.key == "Enter" || e.key == " "){
+            onInput(e.currentTarget.value);
+            e.currentTarget.value = "";
+        }
+    }
 
     return(
         <div className="guess-input">
-            <input className="input-elem" onChange={(e)=>setInput(e.target.value)} type="text" min={1} max={1} placeholder="Enter letter guess"></input>
-            <button className="short-btn" onClick={()=>onInput(inputValue)}>Submit</button>
+            <input className="input-elem" onKeyUp={(e)=>onEnterKey(e)} onChange={(e)=>(inputValue = e.target.value)} type="text" min={1} max={1} placeholder="Enter letter guess"></input>
+            <button className="short-btn" onClick={(e)=>onInput(inputValue)}>Submit</button>
         </div>
     );
 }

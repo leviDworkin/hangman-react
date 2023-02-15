@@ -12,8 +12,9 @@ interface FailedGuessNumProp{
 }
 
 const Gallows = ({attempt}:FailedGuessNumProp)=>{
-    const imgsArr = [logo0,logo1,logo2,logo3,logo4,logo5,logo6];
 
+    const imgsArr = [logo0,logo1,logo2,logo3,logo4,logo5,logo6];
+    console.log("gallows called")
     return(
         <div className="hangman-img">
             <img src={imgsArr[attempt]} alt=''/>

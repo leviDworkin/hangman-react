@@ -154,3 +154,7 @@
     align-items: flex-start;
     gap: 2px;
 }
+
+.letters-row {
+    display: flex;
+}

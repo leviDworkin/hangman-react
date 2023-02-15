@@ -1,38 +1,42 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import GameSelection from './GameSelection';
-import CorrectLetters from './CorrectLetters';
-import { GameTypes, getCharIndexes, validateLetter } from '../globals/GameGlobals';
+import GuessedLetters from './GuessedLetters';
+import { GameTypes, validateLetter } from '../globals/GameGlobals';
 import InputLetter from './InputLetter';
 import Gallows from './Gallows';
-import Guesses from './Guesses';
 
 const Game = () => {
     const [gameType, setGameType]= useState<string>();
-    const [lettersGuessed, setLettersGuessed] = useState<Record<string,boolean>>({});
-    const [currentLetterIndexes, setcurrentLetterIndexes] = useState<number[]>([]);
     const [failedAttempt, setFailedAttempt]= useState<number>(0);
-    const [guessesNum, setGuessesNum] = useState<number>(0);
     const [gameOver, setGameOver] = useState<boolean>(false);
-
-    let selectedWord:string | undefined = gameType && GameTypes[gameType];
+    const [currLetter, setCurrLetter] = useState<string>();
+    const [reset, setReset] = useState<boolean>(false);
+    const [selectedWord, setSelectedWord] = useState<string>();
 
     const resetGame = () => {
+        setReset(true);
         setGameOver(false);
-
         const aType = gameType as string;
 
         setGameType(undefined);
-        selectedWord = undefined;
-        setLettersGuessed({});
-        setcurrentLetterIndexes([]);
+        setSelectedWord(undefined);
         setFailedAttempt(0);
-        setGuessesNum(0);
+        setCurrLetter(undefined);
+        document.title = "Hangman";
 
-        window.setTimeout(()=>handleGameSelect(aType),1);
+        window.setTimeout(()=>{
+            handleGameSelect(aType);
+            setReset(false);
+        },1);
     }
     
     const handleGameSelect = (selectedGame:string)=>{
+        if(selectedWord != undefined){
+            return;
+        }
+    
         setGameType(selectedGame);
+        setSelectedWord(GameTypes[selectedGame]);
     }
 
     const handleInputLetter = (inputLetter:string|undefined)=>{
@@ -40,43 +44,34 @@ const Game = () => {
             return;
         }
 
-        console.log(inputLetter)
         const aIsValidLetter = validateLetter(inputLetter);
         if(aIsValidLetter){
             const aLetter = inputLetter?.toUpperCase() as string;
-            if(lettersGuessed[aLetter] == true || lettersGuessed[aLetter] == false){
-                //TODO- some ui indication for this
-                console.log("Already guessed that letter");
-            }else{
-                const aIndex = selectedWord?.indexOf(aLetter);
-                lettersGuessed[aLetter] = aIndex != -1;
-                const indexesArr = getCharIndexes(selectedWord as string,aLetter);
-                setcurrentLetterIndexes(indexesArr);
-                if(indexesArr.length == 0){
-                    setFailedAttempt(failedAttempt + 1);
-                    if(failedAttempt + 1 == 6){
-                        isLost();
-                        return;
-                    }
-                }
-                
-                const aGuessNumber = guessesNum != null ? guessesNum + 1 : 1; 
-                setGuessesNum(aGuessNumber);
-            }
+            setCurrLetter(aLetter);
+
         }else{
             //TODO- some ui indication for this
             console.log("Invalid input");
         }
     }
 
+    const failedLetter = ()=>{
+        setFailedAttempt(failedAttempt + 1);
+        if(failedAttempt + 1 == 6){
+            isLost();
+        }
+    }
+
     const isWinner = ()=>{
-        console.log("You Won!");
         setGameOver(true);
+        alert("You won the game");
+        document.title = "You won the game";
     }
 
     const isLost = ()=>{
-        console.log("You Lost!");
         setGameOver(true);
+        alert("You lost the game!");
+        document.title = "You lost the game";
     }
 
     return(
@@ -92,8 +87,7 @@ const Game = () => {
             <div className="guess-words">
                 {selectedWord && <InputLetter onInput={handleInputLetter}/>}
                 <div>
-                    {selectedWord && <Guesses guessNum={guessesNum}/>}
-                    {selectedWord && <CorrectLetters correctWord={selectedWord} currentLetterIndexes={currentLetterIndexes} isWinner={isWinner}/>}
+                    {selectedWord && <GuessedLetters correctWord={selectedWord} currLetter={currLetter as string} failedAttemptHandler={failedLetter} isWinner={isWinner} reset={reset}/>}
                 </div>
             </div>
         </div>
